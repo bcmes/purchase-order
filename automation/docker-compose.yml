@@ -1,0 +1,12 @@
+services:
+  mysql:
+    image: mysql:9.1.0
+    container_name: mysql
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: purchaseorder
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: sa
+    ports:
+      - "3306:3306"

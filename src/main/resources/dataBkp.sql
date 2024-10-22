@@ -1,8 +1,8 @@
---produto
-CREATE TABLE product (
-    pk INT PRIMARY KEY AUTO_INCREMENT,
-    description VARCHAR(100) NOT NULL
-);
+----produto
+--CREATE TABLE product (
+--    pk INT PRIMARY KEY AUTO_INCREMENT,
+--    description VARCHAR(100) NOT NULL
+--);
 
 ----tabela de precos do produto
 --CREATE TABLE unitPrice (
