@@ -11,5 +11,5 @@ jobs:
           java-version: '23'
       - name: java install
         run: mvn clean install
-      - name: List files
+      - name: list files
         run: ls -R
