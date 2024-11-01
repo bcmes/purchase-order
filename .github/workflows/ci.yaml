@@ -13,4 +13,4 @@ jobs:
       - name: java install
         run: mvn clean install
       - name: list files
-        run: ls -R
+        run: ls -R #Esse -R é de recursividade. Vai entrando dentro de cada diretorio e listando seu conteudo.
