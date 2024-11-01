@@ -9,4 +9,4 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '23'
-      - run: java -jar purchase-order-0.0.1.jar
+      - run: java -jar target/purchase-order-0.0.1.jar
