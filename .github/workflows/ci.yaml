@@ -12,4 +12,4 @@ jobs:
       - name: List files for debugging
         run: ls -R
       - name: java execution
-        run: java -jar /target/purchase-order-0.0.1.jar
+        run: java -jar target/purchase-order-0.0.1.jar
