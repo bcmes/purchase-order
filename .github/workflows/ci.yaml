@@ -9,9 +9,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '23'
-      - name: List files for debugging
-        run: ls -R
       - name: java install
         run: mvn clean install
+      - name: List files
+        run: ls -R
       - name: java execution
         run: java -jar target/purchase-order-0.0.1.jar
