@@ -13,5 +13,3 @@ jobs:
         run: mvn clean install
       - name: List files
         run: ls -R
-      - name: java execution
-        run: java -jar target/*.jar
