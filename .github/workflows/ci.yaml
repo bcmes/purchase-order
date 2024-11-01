@@ -10,5 +10,5 @@ jobs:
           distribution: 'temurin'
           java-version: '23'
       - name: List files for debugging
-        run: ls -R
-      - run: java -jar target/purchase-order-0.0.1.jar
+        run: ls /target -R
+      - run: java -jar /target/purchase-order-0.0.1.jar
