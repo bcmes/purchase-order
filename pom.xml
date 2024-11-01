@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.github.bcmes</groupId>
 	<artifactId>purchase-order</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>purchase-order</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -28,13 +28,15 @@
 	</scm>
 	<properties>
 		<java.version>23</java.version>
+		<spring-context.version>6.1.14</spring-context.version>
+		<xmlunit-core.version>2.10.0</xmlunit-core.version>
 	</properties>
 	<dependencies>
 		<!--Devido problema https://osv.dev/vulnerability/GHSA-4gc7-5j7h-4qph apresentado na dependencia spring-boot-starter-web abaixo-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>6.1.14</version>
+			<version>${spring-context.version}</version>
 		</dependency>
 
 		<dependency>
@@ -46,7 +48,7 @@
 		<dependency>
 			<groupId>org.xmlunit</groupId>
 			<artifactId>xmlunit-core</artifactId>
-			<version>2.10.0</version>
+			<version>${xmlunit-core.version}</version>
 		</dependency>
 
 		<dependency>

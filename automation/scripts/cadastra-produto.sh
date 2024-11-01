@@ -1,6 +1,6 @@
 counter=1
 
-while [ $counter -le 5 ]
+while [ $counter -le 1 ]
 do
     echo "................................................................................."
     echo "Inserindo produto: $counter"
