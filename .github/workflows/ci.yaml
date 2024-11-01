@@ -9,6 +9,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '23'
+          cache: 'maven'
       - name: java install
         run: mvn clean install
       - name: list files
