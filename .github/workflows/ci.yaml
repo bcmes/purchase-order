@@ -13,15 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-#      - uses: actions/setup-java@v4
-#        with:
-#          distribution: 'temurin'
-#          java-version: '23'
-#          cache: 'maven'
-#      - name: java install
-#        run: mvn clean install
-#      - name: list files
-#        run: ls -R #Esse -R é de recursividade. Vai entrando dentro de cada diretorio e listando seu conteudo.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '23'
+          cache: 'maven'
+      - name: java install
+        run: mvn -B clean install
+      - name: list files
+        run: ls -R #Esse -R é de recursividade. Vai entrando dentro de cada diretorio e listando seu conteudo.
 
 # Daqui pra baixo gera a imagem definida no Dockerfile e manda pro DockerHub, see.: https://github.com/marketplace/actions/build-and-push-docker-images#examples
 
