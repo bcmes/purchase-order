@@ -40,7 +40,7 @@ jobs:
         with:
           push: true
           tags: brunomeloesilva/purchase-order:latest
-          cache-from: type=gha
+          cache-from: type=gha # See.: https://docs.docker.com/build/ci/github-actions/cache/#github-cache
           cache-to: type=gha,mode=max
 
 #Fontes.:
