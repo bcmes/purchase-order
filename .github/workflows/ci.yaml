@@ -40,6 +40,8 @@ jobs:
         with:
           push: true
           tags: brunomeloesilva/purchase-order:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
 #Fontes.:
 # https://github.com/marketplace/actions/setup-java-jdk
