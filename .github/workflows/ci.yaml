@@ -9,7 +9,7 @@ on:
     branches:
       - develop
 jobs:
-  my-publish-app:
+  my-publish-app: # é esse nome que vc vai colocar lá em "Require status checks to pass" no github
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
