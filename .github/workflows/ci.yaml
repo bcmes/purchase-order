@@ -17,3 +17,6 @@ jobs:
         run: mvn clean install
       - name: list files
         run: ls -R #Esse -R é de recursividade. Vai entrando dentro de cada diretorio e listando seu conteudo.
+
+#Fontes.:
+# https://github.com/marketplace/actions/setup-java-jdk
