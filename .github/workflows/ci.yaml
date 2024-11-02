@@ -1,3 +1,8 @@
+# Esse workflow foi auto-gerado em https://github.com/bcmes/project-x/actions/new com o template "java with Maven" :0
+#
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
 name: my-ci
 on:
   pull_request:
@@ -17,6 +22,24 @@ jobs:
         run: mvn clean install
       - name: list files
         run: ls -R #Esse -R é de recursividade. Vai entrando dentro de cada diretorio e listando seu conteudo.
+
+# Daqui pra baixo gera a imagem definida no Dockerfile e manda pro DockerHub, see.: https://github.com/marketplace/actions/build-and-push-docker-images#examples
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: brunomeloesilva/purchase-order:latest
 
 #Fontes.:
 # https://github.com/marketplace/actions/setup-java-jdk
