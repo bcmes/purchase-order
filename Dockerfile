@@ -1,6 +1,6 @@
 # Etapa 1: Compilação
 # Utilizando a imagem oficial do Maven para compilar o projeto
-FROM maven:3.8.8-amazoncorretto-21 AS build
+FROM maven:3.9.9-amazoncorretto-23-alpine AS build
 
 # Definindo o diretório de trabalho
 WORKDIR /app
@@ -19,7 +19,7 @@ RUN mvn clean package -DskipTests
 
 # Etapa 2: Executando o JAR compilado
 # Utilizando a imagem do JDK para executar o JAR gerado
-FROM eclipse-temurin:23.0.1_11-jre-ubi9-minimal
+FROM eclipse-temurin:23-jre-alpine
 
 # Definindo o diretório de trabalho na nova imagem
 WORKDIR /app
