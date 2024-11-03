@@ -120,7 +120,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<!--Versão SonarCloud-->
+				<!--Versão com SonarCloud-->
 				<sonar.organization>bcmes</sonar.organization>
 				<sonar.projectKey>bcmes_purchase-order</sonar.projectKey>
 				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -135,6 +135,12 @@
 								<id>prepare-agent</id>
 								<goals>
 									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>prepare-agent-integration</id>
+								<goals>
+									<goal>prepare-agent-integration</goal>
 								</goals>
 							</execution>
 							<execution>
