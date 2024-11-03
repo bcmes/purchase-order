@@ -97,6 +97,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>4.0.0.4121</version>
+			</plugin>
 			<!--Tem a responsabilidade de se anexar a JVM, e coletar os dados dos testes executados, para montar um relatório a ser enviado ao SonarQube.-->
 			<!--  Não basta apenas baixar este plugin, ele deve ser configurado, conforme realizado em profile.id=coverage abaixo.-->
 			<plugin>
