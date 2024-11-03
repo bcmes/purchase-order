@@ -12,7 +12,10 @@ jobs:
   my-publish-app: # é esse nome que vc vai colocar lá em "Require status checks to pass" no github
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: actions/checkout@v4
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Clona todo o histórico
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
