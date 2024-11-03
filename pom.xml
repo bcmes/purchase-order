@@ -31,6 +31,7 @@
 		<spring-context.version>6.1.14</spring-context.version>
 		<xmlunit-core.version>2.10.0</xmlunit-core.version>
 		<junit-jupiter.version>5.11.3</junit-jupiter.version>
+		<validation-api.version>2.0.1.Final</validation-api.version>
 	</properties>
 	<dependencies>
 		<!--Devido problema https://osv.dev/vulnerability/GHSA-4gc7-5j7h-4qph apresentado na dependencia spring-boot-starter-web abaixo-->
@@ -81,6 +82,13 @@
 			<version>${junit-jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Para usar os beans validations. -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
 
 	</dependencies>
 
