@@ -1,10 +1,15 @@
+# Esse workflow foi auto-gerado em https://github.com/bcmes/project-x/actions/new com o template "java with Maven" :0
+#
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
 name: my-ci
 on:
   pull_request:
     branches:
       - develop
 jobs:
-  my-publish-app:
+  my-publish-app: # é esse nome que vc vai colocar lá em "Require status checks to pass" no github
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,9 +19,49 @@ jobs:
           java-version: '23'
           cache: 'maven'
       - name: java install
-        run: mvn clean install
+        run: mvn -B clean install
       - name: list files
         run: ls -R #Esse -R é de recursividade. Vai entrando dentro de cada diretorio e listando seu conteudo.
+
+# Daqui pra baixo gera a imagem definida no Dockerfile e manda pro DockerHub, see.: https://github.com/marketplace/actions/build-and-push-docker-images#examples
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }} # Esse token deve ter permissao de escrita no docker-hub
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: brunomeloesilva/purchase-order:latest
+          cache-from: type=gha # See.: https://docs.docker.com/build/ci/github-actions/cache/#github-cache
+          cache-to: type=gha,mode=max
+
+# Configuracão com sonarCloud
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Vc tem que ir no https://sonarcloud.io/ e configurar/fazer o bind do projeto
+        run: mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar -Pcoverage -Dsonar.projectKey=bcmes_purchase-order
 
 #Fontes.:
 # https://github.com/marketplace/actions/setup-java-jdk

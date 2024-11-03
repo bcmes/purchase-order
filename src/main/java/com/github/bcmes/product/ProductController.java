@@ -1,5 +1,6 @@
 package com.github.bcmes.product;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -30,7 +31,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductEntity> addOne(@RequestBody @NonNull ProductRequest body) {
+    public ResponseEntity<ProductEntity> addOne(@Valid @RequestBody @NonNull ProductRequest body) {
         ProductEntity productEntity = productRepository.saveAndFlush(body.toEntity());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
