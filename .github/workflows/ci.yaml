@@ -63,6 +63,5 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Vc tem que ir no https://sonarcloud.io/ e configurar/fazer o bind do projeto
         run: mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bcmes_purchase-order
 
-
 #Fontes.:
 # https://github.com/marketplace/actions/setup-java-jdk
