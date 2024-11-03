@@ -32,6 +32,7 @@
 		<xmlunit-core.version>2.10.0</xmlunit-core.version>
 		<junit-jupiter.version>5.11.3</junit-jupiter.version>
 		<validation-api.version>2.0.1.Final</validation-api.version>
+		<jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
 	</properties>
 	<dependencies>
 		<!--Devido problema https://osv.dev/vulnerability/GHSA-4gc7-5j7h-4qph apresentado na dependencia spring-boot-starter-web abaixo-->
@@ -88,8 +89,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>
@@ -98,7 +97,56 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!--Tem a responsabilidade de se anexar a JVM, e coletar os dados dos testes executados, para montar um relatório a ser enviado ao SonarQube.-->
+			<!--  Não basta apenas baixar este plugin, ele deve ser configurado, conforme realizado em profile.id=coverage abaixo.-->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+			</plugin>
 		</plugins>
 	</build>
+
+	<!--Configurei o plugin do jacoco aqui para melhor organizacão-->
+	<profiles>
+		<profile>
+			<id>coverage</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!--Versão SonarCloud-->
+				<sonar.organization>bcmes</sonar.organization>
+				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>prepare-agent</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<goals>
+									<goal>report</goal>
+								</goals>
+								<configuration>
+									<formats>
+										<format>XML</format>
+									</formats>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
