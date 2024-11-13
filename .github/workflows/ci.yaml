@@ -10,19 +10,19 @@ on:
       - develop
 jobs:
   my-publish-app: # é esse nome que vc vai colocar lá em "Require status checks to pass" no github
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #rodando um container com a ultima versao disponivel do ubuntu
     steps:
       - name: actions/checkout@v4
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Clona todo o histórico
+          fetch-depth: 0  # Clona toodo o histórico
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '23'
           cache: 'maven'
       - name: java install
-        run: mvn -B clean install
+        run: mvn -B clean install #pra verificar se a aplicaćão builda com sucesso
       - name: list files
         run: ls -R #Esse -R é de recursividade. Vai entrando dentro de cada diretorio e listando seu conteudo.
 
@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }} # Esse token deve ter permissao de escrita no docker-hub
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v6 #vai procurar o Dockerfile na raiz do projeto
         with:
           push: true
           tags: brunomeloesilva/purchase-order:latest

@@ -13,3 +13,5 @@ public class Application {
 	}
 
 }
+
+//TODO Issue.: No SonarCloud o coverage não aparece, embora ele apareća no commmit quando há alteraćões.
