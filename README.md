@@ -14,3 +14,5 @@
 
 ### Para trabalhar com este projeto
 - Plugin do Mermaid: https://plugins.jetbrains.com/plugin/20146-mermaid
+
+Obs.: Se tiver um PR aberto, faća o merge dele para atualizar a branch develop....eu costumo esquecer !
