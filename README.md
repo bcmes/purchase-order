@@ -3,6 +3,10 @@
 - customizaćão do banner do spring
 - saida no terminal colorida
 - como fazer requisićões via curl
+  - post com loop de n elementos
+  - get
+  - delete
+  - put
 - testes para o controller com MockMvc
 - CI com github pipeline
   - verifica se a aplicaćão builda com sucesso
@@ -11,6 +15,9 @@
 - docker-compose
   - mysql
 - k8s
+  - criar o cluster
+  - deployment
+  - service
 
 ### Para trabalhar com este projeto
 - Plugin do Mermaid: https://plugins.jetbrains.com/plugin/20146-mermaid
