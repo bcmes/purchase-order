@@ -18,6 +18,9 @@
   - criar o cluster
   - deployment
   - service
+- Spring Boot Actuator
+  - request para alterar o log level em tempo de execućão
+  - request para matar o app
 
 ### Para trabalhar com este projeto
 - Plugin do Mermaid: https://plugins.jetbrains.com/plugin/20146-mermaid

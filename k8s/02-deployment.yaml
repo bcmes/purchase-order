@@ -15,6 +15,14 @@ spec:
       containers:
         - name: my-app
           image: "brunomeloesilva/my-app:latest"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: 1
+            timeoutSeconds: 1
+            successThreshold: 1
 
 # cd /home/bs/Documents/java-projects/purchase-order
 # docker build -t brunomeloesilva/my-app:latest .

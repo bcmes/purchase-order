@@ -17,3 +17,9 @@ spec:
 # kubectl port-forward svc/my-service 8080:80
 ## kubectl port-forward svc/my-service <porta-local-de-escolha-da-sua-maquina>:<porta-do-service>
 ## Obs.: exemplo de chamada.: GET http://localhost:8080/products
+
+# Parar tudo.:
+# kubectl delete svc my-service
+# kubectl delete deployment my-deployment
+# kind delete clusters my-fuck-cluster
+# docker logout
