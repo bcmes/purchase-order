@@ -23,6 +23,14 @@ spec:
             failureThreshold: 1
             timeoutSeconds: 1
             successThreshold: 1
+#          readinessProbe:
+#            httpGet:
+#              path: /actuator/health
+#              port: 8080
+#            periodSeconds: 3
+#            failureThreshold: 1
+#            timeoutSeconds: 1
+#            successThreshold: 1
 
 # cd /home/bs/Documents/java-projects/purchase-order
 # docker build -t brunomeloesilva/my-app:latest .

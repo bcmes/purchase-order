@@ -21,6 +21,7 @@
 - Spring Boot Actuator
   - request para alterar o log level em tempo de execućão
   - request para matar o app
+  - CustomHealthIndicator
 
 ### Para trabalhar com este projeto
 - Plugin do Mermaid: https://plugins.jetbrains.com/plugin/20146-mermaid
