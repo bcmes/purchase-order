@@ -17,7 +17,11 @@
 - k8s
   - criar o cluster
   - deployment
+    - definindo limites computacionais para o pod
+    - startupProbe, livenessProbe, readinessProbe
   - service
+  - metric-server
+  - hpa
 - Spring Boot Actuator
   - request para alterar o log level em tempo de execućão
   - request para matar o app

@@ -1,0 +1,15 @@
+kind: HorizontalPodAutoscaler #Para este funcionar, a coleta de metricas, metrics-server, tem que estar rodando..
+apiVersion: autoscaling/v1
+metadata:
+  name: my-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-deployment #informe o name do deployment alvo
+  minReplicas: 1
+  maxReplicas: 3 #nunca cria mais replicas que isso
+  targetCPUUtilizationPercentage: 30 #Quando chegar em 30% do consumo de CPU, ele scale up, mesmo de 30% scale down.
+
+# kubectl apply -f 05-hpa.yaml
+# kubectl get hpa
