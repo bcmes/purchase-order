@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: my-app
+  type: LoadBalancer
+  ports:
+    - name: my-service
+      port: 80 # porta do service
+      targetPort: 8080 # porta da aplicaćão que roda dentro do container
+      protocol: TCP
+
+# kubectl apply -f 03-service.yaml
+# kubectl get svc
+# kubectl port-forward svc/my-service 8080:80
+## kubectl port-forward svc/my-service <porta-local-de-escolha-da-sua-maquina>:<porta-do-service>
+## Obs.: exemplo de chamada.: GET http://localhost:8080/products
+
+# Parar tudo.:
+# kubectl delete svc my-service
+# kubectl delete deployment my-deployment
+# kind delete clusters my-fuck-cluster
+# docker logout

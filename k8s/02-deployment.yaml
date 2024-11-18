@@ -1,0 +1,57 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: my-deployment
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "my-app"
+    spec:
+      containers:
+        - name: my-app
+          image: "brunomeloesilva/my-app:latest"
+          startupProbe: # check a subida do app, se ok, libera o livenessProbe e o readinessProbe para funcionamento
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            periodSeconds: 3
+            failureThreshold: 10
+          livenessProbe: # recria o pod, se true
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: 1
+            timeoutSeconds: 1
+            successThreshold: 1
+          readinessProbe: # bloqueia o trafego para o pod, se true
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            periodSeconds: 3
+            failureThreshold: 1
+            timeoutSeconds: 1
+            successThreshold: 1
+
+# cd /home/bs/Documents/java-projects/purchase-order
+# docker build -t brunomeloesilva/my-app:latest .
+# docker login -u brunomeloesilva
+# docker push brunomeloesilva/my-app
+# docker logout
+# cd /home/bs/Documents/java-projects/purchase-order/k8s
+# kubectl apply -f 02-deployment.yaml
+## kubectl apply -f 02-deployment.yaml && watch -n1 kubectl get pods
+# kubectl get deployments
+# kubectl get replicasets
+# kubectl get pods
+# kubectl describe deployment my-deployment
+# kubectl describe pod my-deployment-6f888f5b5d-s4sld
+
+# Obs.:
+# - Se mudar o metadata.name e der apply novamente, vc fica com 2 deploys no ar
+# - Se nada mudou no arquivo e você der apply novamente, os pods nao serao 'reiniciados'. Ou seja, se houver um novo latest no docker hub, não será atualizado automaticamente, apenas com um novo apply !
