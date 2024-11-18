@@ -137,6 +137,7 @@ spec:
             - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
             - --kubelet-use-node-status-port
             - --metric-resolution=15s
+            - --kubelet-insecure-tls #para permirtir trabalhar sem cobrar tls
           image: registry.k8s.io/metrics-server/metrics-server:v0.7.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -199,3 +200,6 @@ spec:
     namespace: kube-system
   version: v1beta1
   versionPriority: 100
+
+# kubectl apply -f 04-metric-server.yaml
+# kubectl get apiservices
