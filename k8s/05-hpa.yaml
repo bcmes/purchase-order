@@ -13,3 +13,8 @@ spec:
 
 # kubectl apply -f 05-hpa.yaml
 # kubectl get hpa
+# Para realizar o teste de performance usei o fortio, conforme abaixo.:
+# kubectl run -it fortio --rm --image=fortio/fortio -- load -qps 1800 -t 120s -c 70 "http://my-service/actuator/health"
+# watch -n1 kubectl get hpa
+
+# Obs.: Observei que os pods subiram, e quando o consumo zerou, eles desceram, mas demora, não desce de imadiato !
