@@ -204,3 +204,9 @@ spec:
 # kubectl apply -f 04-metric-server.yaml
 # kubectl get apiservices
 # para ver os recursos consumidos pelo pod.: kubectl top pod my-deployment-74955d89bb-k5nkp
+
+# Obs.: No cloud esse cara já vem instalado por padrão, junto com outras métricas !
+# Obs.: Esse arquivo aqui eu baixei da doc.: https://github.com/kubernetes-sigs/metrics-server?tab=readme-ov-file#installation
+## Ao invés de executar o comando sugerido no link acima, eu baixei o arquivo e fiz a edićão para não cobrar TLS !
+## baixei, fazendo.: wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+## e depois renomeei para "04-metric-server.yaml" e fiz a edićão para não cobrar TLS !
