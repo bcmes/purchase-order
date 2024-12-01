@@ -12,7 +12,7 @@ resource "aws_security_group" "my-sg" {
   }
 }
 
-resource "aws_iam_role" "my_role" {
+resource "aws_iam_role" "my-role-cluster" {
   name = "my-role-eks-sts"
 
   # Terraform's "jsonencode" function converts a
@@ -36,12 +36,12 @@ resource "aws_iam_role" "my_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "my-rpa-AmazonEKSVPCResourceController" {
-  role       = aws_iam_role.my_role.name
+  role       = aws_iam_role.my-role-cluster.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController" #Policy padrão da aws
 }
 
 resource "aws_iam_role_policy_attachment" "my-rpa-AmazonEKSClusterPolicy" {
-  role       = aws_iam_role.my_role.name
+  role       = aws_iam_role.my-role-cluster.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy" #Policy padrão da aws
 }
 
@@ -52,7 +52,7 @@ resource "aws_cloudwatch_log_group" "my-clg" {
 
 resource "aws_eks_cluster" "my-ec" {
   name     = "my-eks-cluster"
-  role_arn = aws_iam_role.my_role.arn #aplicando uma role ao recurso
+  role_arn = aws_iam_role.my-role-cluster.arn #aplicando uma role ao recurso
   enabled_cluster_log_types = ["api","audit"]
 
   vpc_config {
