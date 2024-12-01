@@ -52,7 +52,7 @@ resource "aws_cloudwatch_log_group" "my-clg" {
 
 resource "aws_eks_cluster" "my-ec" {
   name     = "my-eks-cluster"
-  role_arn = aws_iam_role.my_role.arn
+  role_arn = aws_iam_role.my_role.arn #aplicando uma role ao recurso
   enabled_cluster_log_types = ["api","audit"]
 
   vpc_config {
