@@ -1,0 +1,46 @@
+resource "aws_security_group" "my-sg" {
+  vpc_id      = aws_vpc.my-vpc.id
+  egress { #o vpc pode acessar qualquer site, regras de saída.
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    prefix_list_ids = []
+  }
+  tags = {
+    Name = "my-security-group"
+  }
+}
+
+resource "aws_iam_role" "my_role" {
+  name = "my-role-eks-sts"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Service = "eks.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+
+  tags = {
+    tag-key = "my-role-sts"
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "my-rpa-AmazonEKSVPCResourceController" {
+  role       = aws_iam_role.my_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController" #Policy padrão da aws
+}
+
+resource "aws_iam_role_policy_attachment" "my-rpa-AmazonEKSClusterPolicy" {
+  role       = aws_iam_role.my_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy" #Policy padrão da aws
+}
