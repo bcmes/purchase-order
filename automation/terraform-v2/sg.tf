@@ -44,3 +44,35 @@ resource "aws_iam_role_policy_attachment" "my-rpa-AmazonEKSClusterPolicy" {
   role       = aws_iam_role.my_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy" #Policy padrão da aws
 }
+
+resource "aws_cloudwatch_log_group" "my-clg" {
+  name = "/aws/eks/my-cloudwatch-log-group/cluster"
+  retention_in_days = 3
+}
+
+resource "aws_eks_cluster" "my-ec" {
+  name     = "my-eks-cluster"
+  role_arn = aws_iam_role.my_role.arn
+  enabled_cluster_log_types = ["api","audit"]
+
+  vpc_config {
+    subnet_ids = aws_subnet.my-subnet[*].id
+    security_group_ids = [aws_security_group.my-sg.id]
+  }
+
+  # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
+  # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
+  depends_on = [
+    aws_iam_role_policy_attachment.my-rpa-AmazonEKSVPCResourceController,
+    aws_iam_role_policy_attachment.my-rpa-AmazonEKSClusterPolicy,
+    aws_cloudwatch_log_group.my-clg,
+  ]
+}
+
+output "endpoint" {
+  value = aws_eks_cluster.my-ec.endpoint
+}
+
+output "kubeconfig-certificate-authority-data" {
+  value = aws_eks_cluster.my-ec.certificate_authority[0].data
+}
