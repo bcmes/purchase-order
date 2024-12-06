@@ -1,0 +1,55 @@
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+metadata:
+  name: my-hpa-v2
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-deployment
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 30
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: 500Mi
+
+
+# kubectl delete hpa my-hpa
+# kubectl apply -f 06-hpa-v2.yaml
+# Em uma nova aba.:
+## watch -n1 kubectl get hpa
+# Testes.:
+## Teste 1:
+## kubectl run -it fortio --rm --image=fortio/fortio -- load -qps 1800 -t 120s -c 70 "http://my-service/actuator/health"
+## Teste 2: deu error: timed out waiting for the condition
+## kubectl run -it fortio --rm --image=fortio/fortio -- load -qps 1800 -t 120s -c 70 -H "Content-Type: application/json" -payload '{"description": "Product X"}' -method POST "http://my-service/products"
+
+# A versão 2 do HPA esta muito melhor.: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+## Além de permitir escalar por consumo de cpu e memoria, permite escalar por metricas como:
+## Quantidade de mensagens esperando na fila para serem processadas
+## Quantidade de pacotes por segundo
+## Quantidade de requisićões por segundo
+## E qualquer métrica customizada interna ou externa ao cluster..
+
+# Para testar metricas customizadas
+# Inserindo a dependencia no gerenciador de dependencias do K8s.:
+#  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+#  helm repo update
+# Instalando a dependencia.:
+#  helm install prometheus-adapter prometheus-community/prometheus-adapter
+# Listando as metricas atuais.:
+#  kubectl port-forward svc/my-service 8080:80
+#  kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1
+# Editando ConfigMap do Prometheus Adapter.:
+# kubectl edit configmap prometheus-adapter -n default
+# me perdi aqui :(

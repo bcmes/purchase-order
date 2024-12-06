@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: my-app
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -15,6 +15,13 @@ spec:
       containers:
         - name: my-app
           image: "brunomeloesilva/my-app:latest"
+          resources: #definicao da quantidade de recursos computacionais por pod
+            requests: #define os recursos minimos necessarios
+              cpu: 500m #pelo menos 100 milicors
+              memory: 300Mi #pelo menos 20 megas de memoria
+            limits: #define os recursos maximos permitidos
+              cpu: 1000m
+              memory: 600Mi
           startupProbe: # check a subida do app, se ok, libera o livenessProbe e o readinessProbe para funcionamento
             httpGet:
               path: /actuator/health
@@ -55,3 +62,5 @@ spec:
 # Obs.:
 # - Se mudar o metadata.name e der apply novamente, vc fica com 2 deploys no ar
 # - Se nada mudou no arquivo e você der apply novamente, os pods nao serao 'reiniciados'. Ou seja, se houver um novo latest no docker hub, não será atualizado automaticamente, apenas com um novo apply !
+# - para ver os recursos consumidos no instante no pod.: kubectl top pods
+#     - Se o maximo de recurso definido para o pod, não for suficiente, o pod nem sobe, ou pode subir e nunca ficar pronto para receber requisicoes
