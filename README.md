@@ -17,7 +17,11 @@
 - k8s
   - criar o cluster
   - deployment
+    - definindo limites computacionais para o pod
+    - startupProbe, livenessProbe, readinessProbe
   - service
+  - metric-server
+  - hpa
 - Spring Boot Actuator
   - request para alterar o log level em tempo de execućão
   - request para matar o app
@@ -26,4 +30,5 @@
 ### Para trabalhar com este projeto
 - Plugin do Mermaid: https://plugins.jetbrains.com/plugin/20146-mermaid
 
+Obs.: Com certeza tem mais coisas que certamente esqueci de descrever aqui !
 Obs.: Se tiver um PR aberto, faća o merge dele para atualizar a branch develop....eu costumo esquecer !
