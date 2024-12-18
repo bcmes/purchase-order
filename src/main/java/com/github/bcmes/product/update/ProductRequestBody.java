@@ -1,6 +1,8 @@
-package com.github.bcmes.product;
+package com.github.bcmes.product.update;
 
-public class ProductPutRequest {
+import com.github.bcmes.repository.ProductEntity;
+
+public class ProductRequestBody {
     private Long id;
     private String description;
 

@@ -1,4 +1,4 @@
-package com.github.bcmes.product;
+package com.github.bcmes.configure;
 
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;

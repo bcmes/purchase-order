@@ -1,4 +1,4 @@
-package com.github.bcmes.product;
+package com.github.bcmes.repository;
 
 import jakarta.persistence.*;
 
