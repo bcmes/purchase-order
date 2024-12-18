@@ -1,4 +1,4 @@
-package com.github.bcmes.product;
+package com.github.bcmes.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
